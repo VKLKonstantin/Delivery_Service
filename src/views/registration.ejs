@@ -1,0 +1,14 @@
+<%- include('header'), {title:title} %>
+    <div class="column">
+        <form method="POST" style="position: relative" action="/users/registration">
+            <input type="text" required="required" class="input_login_password" id="email" name="email"
+                placeholder="email">
+            <input type="password" required="required" class="input_login_password" id="password" name="passwordHash"
+                placeholder="password">
+            <input type="text" required="required" class="input_login_password" id="name" name="name"
+                placeholder="name">
+            <input type="text" class="input_login_password" id="contactPhone" name="contactPhone"
+                placeholder="contactPhone">
+            <button type="submit" class="gradient-button" style="left:-5%">Регистрация</button>
+        </form>
+    </div>

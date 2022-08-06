@@ -1,0 +1,111 @@
+.center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+.gradient-button {
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    font-family: cursive;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #9EEFE1 0%, #4830F0 51%, #9EEFE1 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+    position: absolute;
+    left: 40%;
+    top: 100%;
+}
+
+.gradient-button:hover {
+    background-position: right center;
+}
+
+.back {
+    box-sizing: border-box;
+    padding: 0 25px;
+    margin: 0 15px 15px 0;
+    outline: none;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    height: 46px;
+    line-height: 46px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #444;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    transition: box-shadow 0.2s;
+    position: absolute;
+    top: 5%;
+    right: 0%;
+}
+
+.back:focus-visible {
+    border: 1px solid #4c51f9;
+    outline: none;
+}
+
+.back:hover {
+    transition: all 0.2s;
+    box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
+
+.back:active {
+    background-color: #808080;
+}
+
+.button_delete {
+    text-decoration: none;
+    display: inline-block;
+    color: red;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    left: 14.5%;
+    top: 100%;
+}
+
+.button_delete:hover {
+    cursor: pointer;
+    box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+    font-size: 15px;
+    color: white;
+    background: red;
+    transition: all 1s;
+}
+
+.input_login_password {
+    background: rgb(247, 247, 247);
+    border: 1px solid rgba(147, 184, 189, 0.8);
+    box-shadow:
+        0pt 2px 5px rgba(105, 108, 109, 0.7),
+        0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+    border-radius: 5px;
+    width: 88%;
+    height: 50px;
+
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
