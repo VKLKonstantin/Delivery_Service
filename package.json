@@ -1,0 +1,14 @@
+{
+  "name": "Delivery_Service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/VKLKonstantin/Delivery_Service.git",
+  "author": "Konstantin",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
