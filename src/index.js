@@ -1,10 +1,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/userRouter')
-const app = express();
+const appRouter = require('./routes/appRouter')
+const session = require('express-session')
+const passport = require('passport')
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT
 const UrlDB = process.env.UrlDB
+
+const app = express()
+    .set('view engine', 'ejs')
+    .set('views', './src/views')
+    .use(express.urlencoded())
+    .use(session({ secret: 'SECRET' }))
+    .use(passport.initialize())
+    .use(passport.session())
+    .use(express.static("public"))
+    .use('/users', userRouter)
+    .use('/api', appRouter)
+    .use('/', (req, res) => {
+        res.render("start", { title: "Добро пожаловать на наш сервис доставки еды" });
+    })
 
 async function start(PORT, UrlDB) {
     try {
@@ -25,14 +41,5 @@ async function start(PORT, UrlDB) {
         console.log(e)
     }
 }
-
-app.set('view engine', 'ejs')
-.set('views', './src/views')
-.use(express.static("public"))
-.use(express.urlencoded())
-.use('/users', userRouter)
-.use('/', (req, res) => {
-    res.render("start", { title: "Добро пожаловать на наш сервис доставки еды" });
-})
 
 start(PORT, UrlDB)
