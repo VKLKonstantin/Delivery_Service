@@ -109,3 +109,44 @@
     display: flex;
     flex-direction: column;
 }
+
+.card {
+    display: block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 2px 16px;
+    border-radius: 10px;
+    max-width: 300px;
+    background: #8B008B;
+
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card>div {
+    color: red;
+    font-size: 15px;
+}
+
+.card>div>span {
+    color: #9400D3;
+    font-size: 12px;
+}
+
+.dashboard {
+    position: absolute;
+    right: 5%;
+    top: 75%;
+    background: #9370DB;
+    border-radius: 10px;
+    padding: 10px 16px;
+}
+
+.icon_delete {
+    width: 20px;
+    height: 20px;
+    float: right;
+    cursor: pointer;
+}

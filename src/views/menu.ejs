@@ -1,6 +1,30 @@
 <%- include('header'), {title:title} %>
 
-    <a class="gradient-button" href="/api/books">Все книги</a>
-    <a class="gradient-button" href="/api/createBook" style="margin-top:100px">Добавить книгу</a>
-    <a class="gradient-button" href="/user/me" style="margin-top:200px">Мой профиль</a>
-    <%- include('end') %>
+    <a class="gradient-button" href="/advent/create" style="left:5%; top: 135%">Добавить обЪявление</a>
+    <a class="gradient-button" href="/users/me" style="left:5%; top: 75%">Мой профиль</a>
+    <% if(adventsData!==null) {%>
+        <div class="dashboard">
+            <h4>Доска объявлений</h4>
+            <% adventsData.map((el)=>{ %>
+
+                <div class="card">
+                
+                    <div>
+                        <span>shortText:</span>
+                        <%=el.shortText %>
+                    </div>
+                    <div>
+                        <span> description: </span>
+                        <%=el.description %>
+                    </div>
+                    
+                    <a href="/advent/delete/<%= el._id %>">
+                        <img class="icon_delete" src="/delete.jpg" alt="удалить" />
+                    </a>
+                </div>
+                <br>
+
+                <% }) %>
+        </div>
+        <% } %>
+            <%- include('end') %>

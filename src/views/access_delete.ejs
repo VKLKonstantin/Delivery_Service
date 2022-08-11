@@ -1,0 +1,7 @@
+<%- include('header'), {title:title} %>
+
+    <form method="POST" style="position: relative" action="/advent/delete/<%=id %>">
+        <button type="submit" class="gradient-button" style="left:-5%">ДА</button>
+    </form>
+    <a class="gradient-button" href="/api/menu" style="left:5%; top: 75%">НЕТ</a>
+    <%- include('end') %>

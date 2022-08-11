@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/userRouter')
 const appRouter = require('./routes/appRouter')
+const adventRouter = require('./routes/adventRouter')
 const session = require('express-session')
 const passport = require('passport')
 
@@ -15,9 +16,11 @@ const app = express()
     .use(session({ secret: 'SECRET' }))
     .use(passport.initialize())
     .use(passport.session())
+    .use('/myUploads', express.static(__dirname + 'routes/myUploads'))
     .use(express.static("public"))
     .use('/users', userRouter)
     .use('/api', appRouter)
+    .use('/advent', adventRouter)
     .use('/', (req, res) => {
         res.render("start", { title: "Добро пожаловать на наш сервис доставки еды" });
     })
@@ -35,7 +38,12 @@ async function start(PORT, UrlDB) {
                 return process.exit(1);
             });
 
-        app.listen(PORT, () => { `Server is running on port ${PORT}` })
+        app.listen(PORT, (err) => {
+            if (err) {
+                throw err
+            }
+            console.log(`Server is running on port ${PORT}`)
+        })
     }
     catch (e) {
         console.log(e)

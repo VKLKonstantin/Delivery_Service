@@ -1,0 +1,14 @@
+<%- include('header'), {title:title} %>
+    <p>
+        <b>Login:</b>
+        <%= user.email %><br />
+            <b>Name:</b>
+            <%= user.name %><br />
+                <% if (user.contactPhone) { %>
+                    <b>Phone:</b>
+                    <%= user.contactPhone %><br />
+                        <% }%>
+    </p>
+    <a class="gradient-button" href="/users/logout">Выйти</a>
+    <a href="/api/menu" class="back"> Назад</a>
+    <%- include('end') %>

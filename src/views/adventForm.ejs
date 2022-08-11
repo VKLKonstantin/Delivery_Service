@@ -1,0 +1,19 @@
+<%- include('header'), {title:title} %>
+
+    <form method="POST" style="position: relative" action="/advent/create">
+        <input type="text" class="input_login_password" id="shortText" name="shortText" placeholder="shortText"
+            required>
+        <input type="text" class="input_login_password" id="description" name="description" placeholder="description">
+        <input type="file" class="input_login_password" id="image" name="image" value="">
+
+
+        <input type="hidden" name="userId" value=<%=id %>>
+        <input type="hidden" name="createdAt" >
+        <input type="hidden" name="updatedAt" >
+
+        <input type="text" class="input_login_password" name="tags" placeholder="tags">
+        <input type="hidden" name="isDeleted" value=false>
+
+        <button type="submit" class="gradient-button" style="left:-5%">Создать</button>
+    </form>
+    <%- include('end') %>
