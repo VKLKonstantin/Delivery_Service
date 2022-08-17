@@ -35,4 +35,4 @@ const AdvertSchema = new Schema({
     },
 })
 
-module.exports = model('advertSchema', AdvertSchema)
+module.exports = model('advertModel', AdvertSchema)

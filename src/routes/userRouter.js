@@ -1,6 +1,7 @@
 const express = require('express')
 const userModel = require('../models/user_model')
 const passport = require('passport')
+const _passwordHash = require('password-hash');
 const adventModel = require('../models/advertisements_model')
 const LocalStrategy = require('passport-local').Strategy
 
@@ -8,14 +9,14 @@ const router = express.Router()
 
 const options = {
     usernameField: 'email',
-    passwordField: 'passwordHash',
+    passwordField: 'password',
 }
 
 const verifyPassword = (user, password) => {
-    return user.passwordHash === password
+    return _passwordHash.verify(password, user.passwordHash)
 };
 
-const verify = (email, passwordHash, done) => {
+const verify = (email, password, done) => {
     userModel.findOne({ email }, (err, user) => {
         if (err) {
             return done(err)
@@ -23,7 +24,7 @@ const verify = (email, passwordHash, done) => {
         if (!user) {
             return done(null, false, { message: `Пользователь с почтой ${email} не найден` })
         }
-        if (!verifyPassword(user, passwordHash)) {
+        if (!verifyPassword(user, password)) {
             return done(null, false, { message: 'Не верный пароль' })
         }
         return done(null, user)
@@ -49,14 +50,20 @@ router.get('/registration', (req, res) => {
 
 router.post('/registration', async (req, res) => {
 
-    const { email, passwordHash, name, contactPhone } = req.body;
-
+    const { email, password, name, contactPhone } = req.body;
+    if (_passwordHash.isHashed(password)) {
+        alert('Введен хэш пароля')
+        console.log('Введен хэш пароля')
+        res.redirect("/users/login")
+    }
+    const passwordHash = _passwordHash.generate(password)
+    console.log('passwordHash', passwordHash)
     try {
-        await userModel.create({ email, passwordHash, name, contactPhone })
+        await userModel.create({ email, passwordHash: password, name, contactPhone })
         const adventsData = await adventModel.find({ isDeleted: false })
         const credentials = await userModel.findOne({ email })
         console.log('credentials', credentials)
-        res.render('menu', { title: 'Добро пожаловать на сервис доставки еды QuicK PandA', adventsData });
+        res.redirect("/users/login")
         // res.status('ok')
         // res.json({ credentials })
     }

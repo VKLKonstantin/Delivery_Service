@@ -8,7 +8,7 @@
             <% adventsData.map((el)=>{ %>
 
                 <div class="card">
-                
+
                     <div>
                         <span>shortText:</span>
                         <%=el.shortText %>
@@ -17,7 +17,7 @@
                         <span> description: </span>
                         <%=el.description %>
                     </div>
-                    
+
                     <a href="/advent/delete/<%= el._id %>">
                         <img class="icon_delete" src="/delete.jpg" alt="удалить" />
                     </a>
@@ -27,4 +27,70 @@
                 <% }) %>
         </div>
         <% } %>
+
+            <div class="chat">
+                <h1>Чат</h1>
+                <div class="messageBlock" id="chatList">
+                    
+                    <% usersChat.map((user)=>{ %>
+                        <div class="messageBlock2">
+                            <small>
+                                <%= user.name %>
+                            </small>
+                            <small>
+                                <%= user.createdAt %>
+                            </small>
+                            <br />
+                            <div class="contentMessageBlock">
+                                <%= user.messages %>
+                            </div>
+                        </div>
+                        <br />
+                        <% }) %>
+                </div>
+                <div>
+                    <input type="text" id="user" class="form-control" value=<%=user.name %> readonly >
+                </div>
+                <div >
+                    <!-- <label for="text">Write Your comment</label> -->
+                    <textarea placeholder="message" id="comment" name="comment" rows="5" cols="33"></textarea>
+                </div>
+                <button class="chat-button" type="submit" id="send-room"> Отправить </button>
+            </div>
+            <script>
+                const roomName = location.pathname.split('/').pop();
+                const socket = io.connect('/', { query: `roomName=${roomName}` });
+
+                const boxList = document.querySelector('#chatList');
+                const inputUsername = document.querySelector('#user');
+                const inputText = document.querySelector('#comment');
+                const sendRoom = document.querySelector('#send-room');
+
+                const getTmp = (msg) => {
+                    return `
+                        <div class="messageBlock2">
+                            <div>
+                                <small> ${msg.username} </small>
+                                <small> ${msg.date} </small>
+                            </div>
+                            <div class="contentMessageBlock">${msg.comment}</div>
+                        </div>
+                        <br />
+                `;
+                };
+
+                socket.on('message-to-room', (msg) => {
+                    const div = getTmp(msg)
+                    boxList.insertAdjacentHTML('beforeend', div)
+                });
+
+                sendRoom.addEventListener('click', () => {
+                    socket.emit('message-to-room', {
+                        username: inputUsername.value,
+                        date: new Date().toLocaleString(),
+                        comment: inputText.value,
+                    })
+                })
+
+            </script>
             <%- include('end') %>
